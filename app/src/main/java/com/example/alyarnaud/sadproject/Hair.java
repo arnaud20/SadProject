@@ -20,7 +20,7 @@ public class Hair extends Face {
         myHairColor.setColor(Color.rgb(initRed,initGreen,initBlue));
 
     }
-    public void drawHair(Canvas canvas){
+    public void drawFace(Canvas canvas){
 
         int hairStyle = whichHair;
         if (hairStyle == 0){

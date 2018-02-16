@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SadProject</string>
+    <string name="redRGB">260</string>
+    <string name="greenRGB">12</string>
+    <string name="blueRGB">40</string>
+    <string-array name="hairstyle_array">
+        <item>Mohawk</item>
+        <item>Piggy Buns</item>
+        <item>Square</item>
+    </string-array>
 </resources>

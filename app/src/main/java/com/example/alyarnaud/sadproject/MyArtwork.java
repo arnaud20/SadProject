@@ -16,6 +16,7 @@ import java.util.Random;
 public class MyArtwork extends SurfaceView{
 
 
+    Face myFace = new Face();
 
     public MyArtwork(Context context) {
         super(context);
@@ -48,11 +49,9 @@ public class MyArtwork extends SurfaceView{
     public void onDraw(Canvas canvas)
     //draw face stuff here
     {
-
-        Face myFace = new Face();
         myFace.drawFace(canvas);
-        //Hair myHair = new Hair(0,200,100,10);
-        //myHair.drawFace(canvas);
+
+
     }
 
 }
