@@ -11,12 +11,15 @@ import static com.example.alyarnaud.sadproject.R.id.randomButton;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     MyArtwork mySurfaceView;
+    Face artsyFace;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mySurfaceView = (MyArtwork) findViewById(R.id.surfaceView);
+        artsyFace = new Face();
 
         Button randomButton = (Button)findViewById(R.id.randomButton);
         randomButton.setOnClickListener(this);
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (buttonLabel.equalsIgnoreCase("Randomize!"))
         {
-            mySurfaceView.randomPaint();
+            artsyFace.randomPaint();
             mySurfaceView.invalidate();
         }
     }

@@ -14,8 +14,7 @@ import java.util.Random;
  */
 
 public class MyArtwork extends SurfaceView{
-    private Random gen = new Random();
-    private Paint randomColor = new Paint();
+
 
 
     public MyArtwork(Context context) {
@@ -45,26 +44,15 @@ public class MyArtwork extends SurfaceView{
     private void generalInit() {
         setWillNotDraw(false);
     }
-    public Paint randomPaint(){
-        int randomRed = gen.nextInt(256);
-        int randomBlue = gen.nextInt(256);
-        int randomGreen = gen.nextInt(256);
-        randomColor.setColor(Color.rgb(randomRed, randomBlue, randomGreen));
-        return randomColor;
-    }
+
     public void onDraw(Canvas canvas)
     //draw face stuff here
     {
-        //Paint skinColor = new Paint();
-        //skinColor.setColor(Color.YELLOW);
-        randomPaint();
-        canvas.drawCircle(800.0f, 800.0f, 600.0f, randomColor);
-        randomPaint();
-        canvas.drawCircle(500.0f, 500.0f, 100.0f, randomColor);
-        canvas.drawCircle(1100.0f, 500.0f, 100.0f, randomColor);
-        randomPaint();
-        canvas.drawRect(700.0f,100.0f,900.0f,400.0f,randomColor);
 
+        Face myFace = new Face();
+        myFace.drawFace(canvas);
+        //Hair myHair = new Hair(0,200,100,10);
+        //myHair.drawFace(canvas);
     }
 
 }
