@@ -1,5 +1,7 @@
 package com.example.alyarnaud.sadproject;
 
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.SurfaceView;
@@ -18,14 +20,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SeekBar.OnSeekBarChangeListener{
 
     MyArtwork mySurfaceView;
-    Face artsyFace;
-    Hair fancyHair;
-    Skin rainbowSkin;
-    Eyes crazyEyes;
-    int whichRadio = 0;
-    int redVal = 0;
-    int greenVal = 0;
-    int blueVal = 0;
+    Face myFace;
+    int whichRadio;
+    Paint myPaint = new Paint();
+    SeekBar redSB;
 
 
     //Retrieve refs to relevant views
@@ -45,14 +43,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         mySurfaceView = (MyArtwork) findViewById(R.id.surfaceView);
-        artsyFace = new Face();
+        myFace = new Face();
 
         //Register the listeners with the views
         //Button
         Button randomButton = (Button) findViewById(R.id.randomButton);
         randomButton.setOnClickListener(this);
         //SeekBars
-        SeekBar redSB = (SeekBar)findViewById(R.id.seekBarRed);
+        redSB = (SeekBar)findViewById(R.id.seekBarRed);
         redSB.setOnSeekBarChangeListener(this);
 
         SeekBar blueSB = (SeekBar)findViewById(R.id.seekBarBlue);
@@ -71,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String buttonLabel = (String) buttonWasClicked.getText();
 
         if (buttonLabel.equalsIgnoreCase("Randomize!")) {
-            artsyFace.randomPaint();
+            mySurfaceView.randomFace();
             mySurfaceView.invalidate();
         }
     }
@@ -84,19 +82,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.radioButtonHair:
                 if (checked)
                     // Change the hair color
-                whichRadio = 1;
+                    myPaint = mySurfaceView.whichHairColor();
+                    int r = Color.red(myPaint.getColor());
+                    redSB.setProgress(r);
+                    int g = Color.green(myPaint.getColor());
+                    int b = Color.blue(myPaint.getColor());
+
+                whichRadio = 1; //Color.red(int color)
                     break;
             case R.id.radioButtonEyes:
                 if (checked)
                     // change the eye color
+                    mySurfaceView.whichEyeColor();
+
                 whichRadio = 2;
                     break;
             case R.id.radioButtonSkin:
                 if (checked)
                     // change the skin color
+                    mySurfaceView.whichSkinColor();
+
                 whichRadio = 3;
+
                     break;
         }
+
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -132,18 +142,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         blueRGBval.setText("" + blueVal);
         greenRGBval.setText("" + greenVal);
 
-        if (whichRadio == 1){
+        /**if (whichRadio == 1){
+            //myFace.setHairstyle(stuff)
             fancyHair = new Hair(1,redVal,blueVal,greenVal);
             mySurfaceView.invalidate();
         }
         else if (whichRadio ==2){
-            crazyEyes = new Eyes(redVal,blueVal,greenVal);
             mySurfaceView.invalidate();
         }
         else {
             rainbowSkin = new Skin(redVal,blueVal,greenVal);
             mySurfaceView.invalidate();
-        }
+        }*/
 
         }
 

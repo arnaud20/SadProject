@@ -45,12 +45,27 @@ public class MyArtwork extends SurfaceView{
     private void generalInit() {
         setWillNotDraw(false);
     }
+    public void randomFace(){
+        myFace.randomize();
+    }
+    public void newHair(Paint newHairColor){
+        myFace.setHairColor(newHairColor);
+    }
+    public Paint whichHairColor(){
+        return myFace.getHairColor();
+
+    }
+    public Paint whichSkinColor(){
+        return myFace.getSkinColor();
+    }
+    public Paint whichEyeColor(){
+        return myFace.getEyeColor();
+    }
 
     public void onDraw(Canvas canvas)
     //draw face stuff here
     {
         myFace.drawFace(canvas);
-
 
     }
 
