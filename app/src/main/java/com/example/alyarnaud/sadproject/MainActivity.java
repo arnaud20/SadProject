@@ -1,42 +1,38 @@
 package com.example.alyarnaud.sadproject;
 
-import android.graphics.Color;
-import android.graphics.Paint;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 
+/**
+ * <!-- class MainActivity -->
+ *
+ *
+ *
+ * @author Alyssa Arnaud
+ * Date: 2/14/18
+ * Course: CS 301 A
+ * Description:  This is the main class that all the other classes interact with
+ * Establishes the listeners for the views
+ */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener,
         SeekBar.OnSeekBarChangeListener{
 
-    MyArtwork mySurfaceView;
-    Face myFace;
-    int whichRadio;
-    Paint myPaint = new Paint();
-    SeekBar redSB;
+    MyArtwork mySurfaceView;//where the face gets drawn
+    Face myFace;//Face object that gets drawn on the screen
 
-
-    //Retrieve refs to relevant views
-    //Radio Buttons
-    //RadioButton hairRB = (RadioButton)findViewById(R.id.radioButtonHair);
-    //RadioButton eyesRB = (RadioButton)findViewById(R.id.radioButtonEyes);
-    //RadioButton skinRB = (RadioButton)findViewById(R.id.radioButtonSkin);
-    //Text views that we'll want to change
-
-    //Spinners
-    //Spinner hairSpinner = (Spinner) findViewById(R.id.spinner2);
-
-
+    /**
+     *  * initializes all of your views and layout to the screen
+     *  * @param savedInstanceState    required stuff
+     *  */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +41,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mySurfaceView = (MyArtwork) findViewById(R.id.surfaceView);
         myFace = new Face();
 
-        //Register the listeners with the views
+        //Find the relevant views by ID
+        //Register the listeners with those views
         //Button
         Button randomButton = (Button) findViewById(R.id.randomButton);
         randomButton.setOnClickListener(this);
         //SeekBars
-        redSB = (SeekBar)findViewById(R.id.seekBarRed);
+        SeekBar redSB = (SeekBar)findViewById(R.id.seekBarRed);
         redSB.setOnSeekBarChangeListener(this);
 
         SeekBar blueSB = (SeekBar)findViewById(R.id.seekBarBlue);
@@ -58,21 +55,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         SeekBar greenSB = (SeekBar)findViewById(R.id.seekBarGreen);
         greenSB.setOnSeekBarChangeListener(this);
-        //Spinners
-        //hairSpinner.setOnItemSelectedListener(this);
+
 
     }
-
+    /**
+     External Citation
+     Date: 12 February 2018
+     Problem: Forgot how to respond to buttons
+     Resource: Nux's example code on moodle
+     Solution: I used the example code from moodle as an outline.
+     */
+    /**
+     *  * registers when a button is clicked
+     *  * @param wasClicked    the button or view that was interacted with
+     *  */
     @Override
     public void onClick(View wasClicked) {
+        //figure out which button was clicked
         Button buttonWasClicked = (Button) wasClicked;
         String buttonLabel = (String) buttonWasClicked.getText();
 
+        //Randomize button paints a new face with random hairstyle and colors
         if (buttonLabel.equalsIgnoreCase("Randomize!")) {
             mySurfaceView.randomFace();
             mySurfaceView.invalidate();
         }
     }
+    /**
+     External Citation
+     Date: 12 February 2018
+     Problem: I did not know how to put items into a spinner
+     Resource: https://www.mkyong.com/android/android-spinner-drop-down-list-example/
+     Solution: I made an array in values like it said to
+     */
+    /**
+     External Citation
+     Date: 12 February 2018
+     Problem: I did not know how radio buttons worked
+     Resource: http://journals.ecs.soton.ac.uk/java/tutorial/post1.0/ui/radiobutton.html
+     Solution: I copied things from the example code
+     */
+    /**
+     *  * initializes all of you views and layout to the screen
+     *  * @param savedInstanceState    required stuff
+     *  */
     public void onRadioButtonClicked(View wasClicked) {
         // Is the button now checked?
         boolean checked = ((RadioButton) wasClicked).isChecked();
@@ -82,43 +108,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.radioButtonHair:
                 if (checked)
                     // Change the hair color
-                    myPaint = mySurfaceView.whichHairColor();
-                    int r = Color.red(myPaint.getColor());
-                    redSB.setProgress(r);
-                    int g = Color.green(myPaint.getColor());
-                    int b = Color.blue(myPaint.getColor());
-
-                whichRadio = 1; //Color.red(int color)
                     break;
             case R.id.radioButtonEyes:
                 if (checked)
                     // change the eye color
                     mySurfaceView.whichEyeColor();
 
-                whichRadio = 2;
                     break;
             case R.id.radioButtonSkin:
                 if (checked)
                     // change the skin color
                     mySurfaceView.whichSkinColor();
-
-                whichRadio = 3;
-
                     break;
         }
 
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-       //parent.getItemAtPosition(pos);
-
+        //Did not get to using this
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        // Do nothing, not applicable
+        // Did not get to using this
     }
 
+    /**
+     *  * registers when Seekbars are changed
+     *  * @param seekbar     which seekbar was moved
+     *  * @param progress    how far along the seek bar is dragged
+     *  * @param fromUser    checks if it was from the user or something else
+     *  */
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
@@ -142,29 +162,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         blueRGBval.setText("" + blueVal);
         greenRGBval.setText("" + greenVal);
 
-        /**if (whichRadio == 1){
-            //myFace.setHairstyle(stuff)
-            fancyHair = new Hair(1,redVal,blueVal,greenVal);
-            mySurfaceView.invalidate();
-        }
-        else if (whichRadio ==2){
-            mySurfaceView.invalidate();
-        }
-        else {
-            rainbowSkin = new Skin(redVal,blueVal,greenVal);
-            mySurfaceView.invalidate();
-        }*/
+
 
         }
 
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-        //Do nothing we dont care
+        //Do nothing we wont use this method
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        //Do nothing we dont care
+        //Do nothing we wont use this method
     }
 }

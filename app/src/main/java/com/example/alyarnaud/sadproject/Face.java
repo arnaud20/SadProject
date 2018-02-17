@@ -6,10 +6,18 @@ import android.graphics.Paint;
 
 import java.util.Random;
 
-/**
- * Created by alyarnaud on 2/16/2018.
- */
 
+/**
+ * <!-- class Face -->
+ *
+ *
+ *
+ * @author Alyssa Arnaud
+ * Date: 2/14/18
+ * Course: CS 301 A
+ * Description:  This is the class that determines what is drawn on the screen
+ *
+ */
 public class Face {
 
     private Random gen = new Random();
@@ -25,14 +33,20 @@ public class Face {
     MyArtwork mySurfaceView;
 
 
-
+    /**
+     *  * Constructor sets all the paints and hairstyle to random
+     *  initial values by calling the randomize method
+     *  */
     public Face(){
         skinPaint = new Paint();
         eyePaint = new Paint();
         hairPaint = new Paint();
         this.randomize();
     }
-
+    /**
+     *  * Draws the face object onto the surface view using helper methods
+     *  * @param canvas     where the Face is actually drawn
+     *  */
     public void drawFace(Canvas canvas){
 
         this.drawSkin(canvas);
@@ -40,7 +54,9 @@ public class Face {
         this.drawHair(canvas);
 
     }
-
+    /**
+     *  * Creates random Paints and hairstyles to draw the face with
+     *  */
     public void randomize(){
         int randomRedA = gen.nextInt(256);
         int randomBlueA = gen.nextInt(256);
@@ -63,14 +79,29 @@ public class Face {
         this.hairStyle = gen.nextInt(2);
 
     }
-
+    /**
+     *  * Helper method for face
+     *  * draws the bottom layer
+     *  * @param canvas     where the Face is actually drawn
+     *  */
     public void drawSkin(Canvas canvas){
         canvas.drawCircle(800.0f, 800.0f, 600.0f, this.skinPaint);
     }
+    /**
+     *  * Helper method for face
+     *  * draws the eyes
+     *  * @param canvas     where the Face is actually drawn
+     *  */
     public void drawEyes(Canvas canvas){
         canvas.drawCircle(500.0f, 500.0f, 100.0f, this.eyePaint);
         canvas.drawCircle(1100.0f, 500.0f, 100.0f, this.eyePaint);
     }
+    /**
+     *  * Helper method for face
+     *  * draws the hair
+     *   * three different possible ways
+     *  * @param canvas     where the Face is actually drawn
+     *  */
     public void drawHair(Canvas canvas){
         if (this.hairStyle == 0){
             canvas.drawRect(400.0f,100.0f,1200.0f,400.0f,this.hairPaint);
@@ -85,6 +116,14 @@ public class Face {
 
         }
     }
+    /**
+     External Citation
+     Date: 16 February 2018
+     Problem: I had lots of problems
+     Resource: Nux!
+     Solution: I changed my Face object to not have child classes
+     and added getters and setters
+     */
     public int getHairStyle(){ return hairStyle;}
 
     public void setHairStyle(int myHairStyle){hairStyle = myHairStyle;}
